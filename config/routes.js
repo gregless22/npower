@@ -9,9 +9,7 @@ const controller = null //this instantiated by the constructor function
 
 	//  deifne the routes for the home
 router.get('/', (req, res, next) => {
-
-  res.end('TODO this will be the home page eventually.');
-
+  res.sendFile(appRoot + '/dist/index.html');
 })
 
 router.get('/about', (req, res, next) => {

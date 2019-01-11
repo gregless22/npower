@@ -10,12 +10,14 @@ services:
       - "4000:3000"
     volumes:
       - .:/app
-      - /app/node_modules
+      - /app/node_modules/
+      # - /app/dist/  this is probably needed once webpack is working
     build: .
     env_file:
       - .env
     environment:
       - NODE_ENV=development
+    command: "npm run watch"
   
   db:
     container_name: db
