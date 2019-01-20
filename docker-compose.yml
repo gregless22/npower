@@ -7,17 +7,24 @@ services:
     depends_on: 
       - db
     ports:
-      - "4000:3000"
+      - ${PORT}
     volumes:
-      - .:/app
+      # i may be holding two storages of the volume data in both containers for the vue data
+      - .:/app/
       - /app/node_modules/
-      # - /app/dist/  this is probably needed once webpack is working
+      - front_end_build:/app/dist/
     build: .
     env_file:
       - .env
     environment:
-      - NODE_ENV=development
-    command: "npm run watch"
+      VIRTUAL_HOST: npower.app
+      VIRTUAL_PORT: ${PORT}
+      # NODE_ENV: development
+    command: "npm run dev"
+    networks:
+      - nginx-proxy
+      - backend
+      - frontend
   
   db:
     container_name: db
@@ -29,3 +36,31 @@ services:
       - ./data:/var/lib/mysql
     env_file:
       - .env
+    networks:
+      - backend
+
+  webpack:
+    container_name: webpack
+    image: npower_app
+    depends_on: 
+      - app
+    volumes:
+      - ./webpack.config.dev.js:/app/webpack.config.dev.js #need to copy in the webpack file 
+      - ./vue:/app/vue/   #this volume is to sync the cource files up so changes can be mirrored in the docker container
+      - front_end_build:/app/dist/  #this is probably needed once webpack has html copied over
+    environment:
+      NODE_ENV: development
+    command: "npm run watch"
+    networks:
+      - frontend
+
+volumes:
+  front_end_build:
+
+networks:
+  backend:
+  frontend:
+  nginx-proxy:
+    external: true
+
+

@@ -1,0 +1,14 @@
+{
+    "title": "Details for residentual behaviour",
+    "form": false,
+    "questions": true,
+    "array": [
+        {   
+            "type": "checkbox",
+            "text": "Please mark which appliences you have",
+            "options": []
+        }
+
+    ]
+}
+        

@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 // routes.js
 
 //get packages.
@@ -9,11 +10,11 @@ const controller = null //this instantiated by the constructor function
 
 	//  deifne the routes for the home
 router.get('/', (req, res, next) => {
-  res.sendFile(appRoot + '/dist/index.html');
+  res.sendFile(appRoot + '/dist/home.html')
 })
 
-router.get('/about', (req, res, next) => {
-	res.end('TODO the about page')
+router.get('/:page', (req, res, next) => {
+	res.sendFile(appRoot + `/dist/${ req.params.page }.html`)
 })
 
 router.get('/products', (req, res, next) => {

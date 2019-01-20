@@ -1,4 +1,4 @@
-// main.js
+// app.js
 const express = require('express')
 const app = express()
 
@@ -20,11 +20,12 @@ const routes = require('./config/routes')(controllers)
 //middleware
 app.use(cors());
 app.use(express.json());
-
 app.use(express.urlencoded({ extended: false }));
 // app.use(cookieParser());
 
 
+// Serve static assets from ./dist .
+app.use(express.static('dist'));
 
 //connect up routes this must be last as it includes the catch all
 // for incoorect address

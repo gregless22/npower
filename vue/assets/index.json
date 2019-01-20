@@ -1,0 +1,19 @@
+[
+    {
+    "title": "Introduction",
+    "description": "Welcome to our short survey to see if check if it is worthwhile upgrading your house to include Solar Panels.  The survey will only take a few shorts minutes to complete, and you may be surprise at the results.  Instally Solar Panels on your house is not only good for the environment, it may also save you a tonne of money!",
+    "questions": null
+    },
+    { "title": "Part A", 
+    "description": "Part A is all about you.  Just enter a few details about yourself so we can contact you afterwards if you are interested in any of our solutions.",
+    "questions": { }
+    },
+    { "title": "Part B", 
+    "description": "Part B is all about your household.  Here we have a few questions about the lifestyle of the people you live with and how many energy hungry appliances you have, racking up your electricy bill each month.",
+    "questions": { }
+    },
+    { "title": "Part C",
+    "description": "Part C is the final part.  We just need to know a few things about your current electricy setup.  Do you all ready have some solar installed and want to expand? Or are you starting from scratch?",
+    "questions": { }
+    }
+]
