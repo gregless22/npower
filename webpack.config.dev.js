@@ -86,7 +86,8 @@ module.exports = {
       title: 'NPower | Home',
       template: 'vue/app.html',
       chunks: ['home', 'runtime', 'vendors'],
-      filename: 'home.html'
+      filename: 'home.html',
+      favicon: 'vue/assets/images/favicon.ico'
     }),
     new HtmlWebpackPlugin({
       title: 'NPower | Survey',
