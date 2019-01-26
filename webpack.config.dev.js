@@ -70,6 +70,17 @@ module.exports = {
           'css-loader',
           'sass-loader',
         ]
+      },
+      {
+        test: /\.(png|svg|jpg|gif)$/,
+        use: [
+          {
+            loader: 'file-loader',
+            options: {
+              outputPath: 'images'
+            }
+          }
+        ]
       }
     ]
   },
@@ -93,29 +104,32 @@ module.exports = {
       title: 'NPower | Survey',
       template: 'vue/app.html',
       chunks: ['survey', 'runtime', 'vendors'],
-      filename: 'survey.html' //relative to root of the application
+      filename: 'survey.html', //relative to root of the application,
+      favicon: 'vue/assets/images/favicon.ico'
     }),
     new HtmlWebpackPlugin({
       title: 'NPower | About',
       template: 'vue/app.html',
       chunks: ['about', 'runtime', 'vendors'],
-      filename: 'about.html' //relative to root of the application
+      filename: 'about.html', //relative to root of the application
+      favicon: 'vue/assets/images/favicon.ico'
     }),
     new HtmlWebpackPlugin({
       title: 'NPower | Products',
       template: 'vue/app.html',
       chunks: ['products', 'runtime', 'vendors'],
-      filename: 'products.html' //relative to root of the application
+      filename: 'products.html', //relative to root of the application
+      favicon: 'vue/assets/images/favicon.ico'
     }),
     new HtmlWebpackPlugin({
       title: 'NPower | Contact',
       template: 'vue/app.html',
       chunks: ['contact', 'runtime', 'vendors'],
-      filename: 'contact.html' //relative to root of the application
+      filename: 'contact.html',//relative to root of the application
+      favicon: 'vue/assets/images/favicon.ico'
     }),
     new MiniCssExtractPlugin({
       filename: 'style.css'
     })
-  ],
-  watch: true
+  ]
 }

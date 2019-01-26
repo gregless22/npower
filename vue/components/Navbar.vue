@@ -1,7 +1,7 @@
 <template>
 	<!-- <b-navbar > -->
 		
-	<b-navbar toggleable="sm" type="dark" variant="dark" fixed="top">
+	<b-navbar toggleable="sm" type="dark" variant="dark" class="w-100">
 		<b-navbar-toggle target="nav_collapse"></b-navbar-toggle>
 		<b-collapse is-nav id="nav_collapse">
 			<b-navbar-nav justified class="w-100">
