@@ -1,6 +1,6 @@
 # docker-compose.yml
 
-version: '3'
+version: '3.7'
 services: 
   app:
     container_name: app
@@ -19,7 +19,7 @@ services:
     environment:
       VIRTUAL_HOST: npower.app
       VIRTUAL_PORT: ${PORT}
-      # NODE_ENV: development
+      NODE_ENV: development
     command: "npm run dev"
     networks:
       - nginx-proxy

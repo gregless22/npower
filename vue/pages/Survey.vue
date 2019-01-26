@@ -24,9 +24,10 @@
     <h5 slot="question">
         {{ instruction[tracker.instruction.iter].description }}    
     </h5>
+    
   </instruction>
 {{ JSON.stringify(this.instruction[tracker.instruction.iter].questions) }}
-
+<p> {{ JSON.stringify(form) }} </p>
   </layout>  
 </template>
 
@@ -82,8 +83,20 @@
           homeType: "",
           homeOwner: "",
           postcode: "",
-          residents: "",
-          lastBill: ""
+          homeResidents: "",
+          lastBill: "",
+          appliances: {
+            kettle: "",
+            aircon: { 
+              exists: "",
+              size: Number
+            },
+            hotWater: "",
+            microwave: "",
+            oven: "",
+            pool: "",
+            spa: ""
+          }
       },
       }
     },
