@@ -1,6 +1,6 @@
 <template>
     <cardTemplate>
-        <b-form class="h-100 p-5" id="question" :form="form" @submit="onSubmit" @reset="onReset" @next="onNext">
+        <b-form class="h-100 p-5" id="question" :form="form" @submit="onSubmit" @next="onNext">
 
 
         <!-- people details -->
@@ -16,13 +16,14 @@
             name="homeResidents" />
         </b-form-group>
 
-        <!-- people details -->
+        <!-- -->
         <b-form-group 
             v-if="show === 1"
             label="Which of the following Appliances do you have"
             label-size="lg"
             label-class="font-weight-bold pt-0"
             class="mb-5">
+
             <b-form-group 
                 label="Kettle"
                 horizontal>
@@ -33,6 +34,7 @@
                     :options="boolean"
                     required />
             </b-form-group>
+
             <b-form-group 
                 label="Air Conditioning"
                 horizontal>
@@ -41,22 +43,121 @@
                     size="md"
                     v-model="form.appliances.aircon.exists"
                     :options="boolean"
+                    required 
+                />
+            </b-form-group>
+            <b-form-group
+                v-if="form.appliances.aircon.exists === 'true'"
+                label="What is the Air Conditioners Capacity?"
+                horizontal>
+                <b-form-radio-group
+                    buttons
+                    size="md"
+                    v-model="form.appliances.aircon.size"
+                    :options="size"
+                    required 
+                />
+            </b-form-group>
+
+            <b-form-group
+                v-if="!form.appliances.aircon.exists"
+                label="When do you normally use the Air Conditioner?"
+                horizontal>
+                <b-form-radio-group
+                    buttons
+                    size="md"
+                    v-model="form.appliances.aircon.use"
+                    :options="airconuse"
+                    required 
+                />
+            </b-form-group>
+
+            <b-form-group 
+                label="Hot Water System"
+                horizontal>
+                <b-form-checkbox-group
+                    buttons
+                    size="md"
+                    v-model="form.appliances.hotWater.exists"
+                    :options="hotWater"
                     required />
             </b-form-group>
+
+             <b-form-group
+                v-if="form.appliances.hotWater.exists.includes('Electric')" 
+                label="Are you on Off-Peak (Tariff 33)"
+                horizontal>
+                <b-form-radio-group
+                    buttons
+                    size="md"
+                    v-model="form.appliances.hotWater.offPeak"
+                    :options="boolean"
+                    required />
+            </b-form-group>
+
+            <b-form-group
+                v-if="form.appliances.hotWater.exists.includes('Electric')" 
+                label="What is the Capacity of the Elecric Hot Water System Only?"
+                horizontal>
+                <b-form-radio-group
+                    buttons
+                    size="md"
+                    v-model="form.appliances.hotWater.size"
+                    :options="hotWaterSize"
+                    required />
+            </b-form-group>
+
+            <b-form-group 
+                label="Microwave"
+                horizontal>
+                <b-form-radio-group
+                    buttons
+                    size="md"
+                    v-model="form.appliances.microwave"
+                    :options="boolean"
+                    required />
+            </b-form-group>
+
+            <b-form-group 
+                label="Oven"
+                horizontal>
+                <b-form-radio-group
+                    buttons
+                    size="md"
+                    v-model="form.appliances.oven"
+                    :options="boolean"
+                    required />
+            </b-form-group>
+
+            <b-form-group 
+                label="Pool"
+                horizontal>
+                <b-form-radio-group
+                    buttons
+                    size="md"
+                    v-model="form.appliances.pool"
+                    :options="boolean"
+                    required />
+            </b-form-group>
+
+            <b-form-group 
+                label="Spa"
+                horizontal>
+                <b-form-radio-group
+                    buttons
+                    size="md"
+                    v-model="form.appliances.spa"
+                    :options="boolean"
+                    required />
+            </b-form-group>
+
         </b-form-group>
 
         
     
-        
-
-
-
-
-
 
         <!-- buttons at the bottom of the form -->
-        <b-button type="reset" @click.prevent="onReset()" variant="danger">Reset</b-button>
-        <b-button type="back" @click.prevent="onBack()" variant="secondary">Back</b-button>
+        <b-button type="back" @click.prevent="onBack()" variant="secondary" v-if="show > 0">Back</b-button>
         <b-button type="next" @click.prevent="onNext()" variant="primary" v-if="show < 1">Next</b-button>
         <b-button type="finish" @click.prevent="onSubmit()" variant="primary" v-else>Finish</b-button>
 
@@ -77,9 +178,17 @@ export default {
     data () {
         return {
             homeResidents: [ "1", "1 - 2", "2 - 3", "4+"],
-            boolean: ["Yes", "No"],
-            appliances: [
-               
+            boolean: [
+                {text: "Yes", value: "true"},
+                {text: "No", value: "false"}
+                ],
+            size: ["< 3.5kW", "3.5 - 8kW", "8.5 - 15kW", "15+kW"],
+            airconuse: [ "Day", "Night" ],
+            hotWater: ["Solar", "Gas", "Electric"],
+            hotWaterSize: ["< 2kW", "2 - 3 kW", "3+ kW"],
+            oven: [
+                {text: "Gas", value: "false"},
+                {text: "Electric", value: "true"}
             ],
             show: 0
         }
@@ -91,17 +200,6 @@ export default {
       this.$emit('input', this.form)
       // this.$emit('accept', this.form)
       
-    },
-    onReset (evt) {
-      // evt.preventDefault();
-      // /* Reset our form values */
-      // this.form.email = '';
-      // this.form.name = '';
-      // this.form.food = null;
-      // this.form.checked = [];
-      // /* Trick to reset/clear native browser form validation state */
-      // this.show = false;
-      // this.$nextTick(() => { this.show = true });
     },
     onNext(evt) {
       //need to check the results are good.

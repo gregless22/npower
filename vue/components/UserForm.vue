@@ -75,7 +75,7 @@
 
       <!-- buttons at the bottom of the form -->
       <b-button type="reset" @click.prevent="onReset()" variant="danger">Reset</b-button>
-      <b-button type="back" @click.prevent="onBack()" variant="secondary">Back</b-button>
+      <b-button type="back" @click.prevent="onBack()" variant="secondary" v-if="show > 0">Back</b-button>
       <b-button type="next" @click.prevent="onNext()" variant="primary" v-if="show < 1">Next</b-button>
       <b-button type="finish" @click.prevent="onSubmit()" variant="primary" v-else>Finish</b-button>
       

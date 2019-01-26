@@ -4,11 +4,19 @@
 
   <!-- question template is used -->
   <question 
-    v-if="tracker.question.test" 
+    v-if="tracker.question.test === 1" 
     :form="form"
-    :questions="instruction[tracker.instruction.iter].questions"
+    
     @input="onForm">
   </question>
+
+  <!-- question template is used -->
+  <question2 
+    v-if="tracker.question.test === 2" 
+    :form="form"
+    
+    @input="onForm">
+  </question2>
   
   <!-- user form template is used -->
     <userForm 
@@ -22,12 +30,12 @@
   <!-- the instruction form is used -->
   <instruction v-if="tracker.instruction.test" @accept="onInstruction">
     <h5 slot="question">
-        {{ instruction[tracker.instruction.iter].description }}    
+        {{ instruction[iter].description }}    
     </h5>
     
   </instruction>
-{{ JSON.stringify(this.instruction[tracker.instruction.iter].questions) }}
-<p> {{ JSON.stringify(form) }} </p>
+<!-- {{ JSON.stringify(this.instruction) }} -->
+<!-- <p> {{ JSON.stringify(form) }} </p> -->
   </layout>  
 </template>
 
@@ -46,6 +54,7 @@
   //get the templates required.
   import userForm from '../components/UserForm.vue'
   import question from '../components/Question'
+  import question2 from '../components/Question2.vue'
   import instruction from '../components/Instruction.vue'
   import layout from '../Layout'
 
@@ -58,22 +67,22 @@
       layout,
       question,
       userForm,
-      instruction
+      instruction,
+      question2
     },
     name: "myForm",
     data() {
       return {
+        iter: 0,
         tracker: {
           form: {
             test: false,
           },
           question: {
-            test: false,
-            iter: 0
+            test: Number,
           },
           instruction: {
-            test: true,
-            iter: 0
+            test: true
           }
         },
         instruction: index,
@@ -89,13 +98,26 @@
             kettle: "",
             aircon: { 
               exists: "",
-              size: Number
+              size: "",
+              use: ""
             },
-            hotWater: "",
+            hotWater: { 
+              exists: [],
+              size: "",
+              offPeak: ""
+            },
             microwave: "",
             oven: "",
             pool: "",
-            spa: ""
+            spa: "",
+          },
+          solar: {
+            exists: "",
+            panels: "",
+            battery: {
+              exists: "",
+              size: ""
+            }
           }
       },
       }
@@ -133,17 +155,17 @@
         evt.preventDefault();
       },
       onInstruction(){
-        if ((this.instruction[this.tracker.instruction.iter]).questions) {
+        if ((this.instruction[this.iter]).questions) {
           // import questions from instruction.questions
           // update the form and questions data.
-          this.tracker.form.test = this.instruction[this.tracker.instruction.iter].questions.form
-          this.tracker.question.test = this.instruction[this.tracker.instruction.iter].questions.questions
+          this.tracker.form.test = this.instruction[this.iter].questions.form
+          this.tracker.question.test = this.instruction[this.iter].questions.questions
           this.tracker.instruction.test = false
 
         } 
 
-          // iterate to the next part
-          this.tracker.instruction.iter++
+           this.iter++
+          
       },
       onForm(evt) {
         
@@ -151,6 +173,15 @@
           this.tracker.form.test = false
           this.tracker.instruction.test = true
           this.tracker.question.test = false
+  
+        //if end of questions post 
+          if (this.iter == this.instruction.length){
+            //set to 0 so it doesnt go out of range.
+            this.iter = 0
+            //post here with axios to back end
+            alert("Survey has been submitted.  Thanks")
+          } 
+
       },
       onQuestion(evt) {
         this.tracker.instruction.test = true
