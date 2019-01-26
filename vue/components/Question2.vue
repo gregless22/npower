@@ -1,6 +1,6 @@
 <template>
     <cardTemplate>
-        <b-form class="h-100 p-5" id="question" :form="form" @submit="onSubmit" @next="onNext">
+        <b-form class="h-100 p-5" id="question" :form="form">
 
         <!-- last bill details -->
         <b-form-group 

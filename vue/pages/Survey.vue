@@ -58,10 +58,6 @@
   import instruction from '../components/Instruction.vue'
   import layout from '../Layout'
 
-  //get the validator.
-  import { validationMixin } from "vuelidate"
-  import { required, minLength } from "vuelidate/lib/validators"
-
   export default {
     components: {
       layout,
@@ -122,20 +118,20 @@
       },
       }
     },
-    mixins: [
-      validationMixin
-    ],
-    validations: {
-      form: {
-        food: {
-          required
-        },
-        name: {
-          required,
-          minLength: minLength(3)   
-        }
-      }
-    },
+    // mixins: [
+    //   validationMixin
+    // ],
+    // validations: {
+    //   form: {
+    //     email: {
+    //       required
+    //     },
+    //     name: {
+    //       required,
+    //       minLength: minLength(3)   
+    //     }
+    //   }
+    // },
     methods: {
       onSubmit() {
         // form submit logic

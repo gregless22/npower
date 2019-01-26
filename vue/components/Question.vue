@@ -1,18 +1,25 @@
 <template>
     <cardTemplate>
-        <b-form class="h-100 p-5" id="question" :form="form" @submit="onSubmit" @next="onNext">
+        <b-form class="h-100 p-5" id="question" :form="form">
 
+    <!-- TODO implement this so questions are fed in -->
+    <!-- <div v-for="(question, index) in questions" :key="index">
+        <b-form-group>
+
+        </b-form-group>
+    </div> -->
 
         <!-- people details -->
         <b-form-group 
             v-if="show === 0"
             label="How many people currently live at the house">
-        <b-form-radio-group 
-            buttons
+        <b-form-radio-group
+            stacked 
+            :buttons="true"
             size="md"
             v-model="form.homeResidents"
             :options="homeResidents"
-            required
+            :required="true"
             name="homeResidents" />
         </b-form-group>
 
@@ -60,7 +67,7 @@
             </b-form-group>
 
             <b-form-group
-                v-if="!form.appliances.aircon.exists"
+                v-if="form.appliances.aircon.exists === 'true'"
                 label="When do you normally use the Air Conditioner?"
                 horizontal>
                 <b-form-radio-group

@@ -4,6 +4,10 @@ import Survey from './Survey.vue'
 
 import BootstrapVue from 'bootstrap-vue'
 
+//get the validator.
+import Vuelidate from 'vuelidate'
+Vue.use(Vuelidate)
+
 import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
 
