@@ -3,15 +3,17 @@
 
 <template>
 	 <layout>
-		 
-	 		<product 
-			 v-for="(product, index) in products" 
-			 :key="index" 
-			 :product="product"
-			 >
+		 <b-container class="ml-5 mr-5">
+			 <b-row>
+				<product 
+					v-for="(product, index) in products" 
+					:key="index" 
+					:product="product"
+				>
 
-	 		</product>
-		 
+				</product>
+			 </b-row>
+		 </b-container>
 	 	<!-- {{ JSON.stringify(products) }} -->
 	</layout>
 </template>

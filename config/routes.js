@@ -22,7 +22,7 @@ router.get('/products', (req, res, next) => {
 })
 
 router.get('/products/:id', (req, res, next) => {
-	res.end(`TODO special products page ${ id }`)
+	res.end(`TODO special products page ${ JSON.stringify(req.params.id) }`)
 })
 
 router.get('/contact', (req, res, next) => {
