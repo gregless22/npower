@@ -10,7 +10,7 @@
 					:key="index" 
 					:product="product"
 				>
-
+				
 				</product>
 			 </b-row>
 		 </b-container>

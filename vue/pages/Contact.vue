@@ -3,9 +3,14 @@
 <template>
   <div>
 	 <layout>
-	 	<div>
+	 	<b-container>
+			 <b-row class="h-100" align-h="center">
+			 <b-col cols="7" class="text-justify">
 	 		<h1>Contact</h1>
-	 	</div>
+			 
+			 </b-col>
+			 </b-row>
+	 	</b-container>
 	 	
 	</layout>
   </div>

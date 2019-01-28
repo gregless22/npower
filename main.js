@@ -8,6 +8,9 @@ const cors = require('cors')
 const path = require('path');
 global.appRoot = path.resolve(__dirname);
 
+// Serve static assets from ./dist .
+app.use(express.static('dist'));
+
 //add the database, routes, controllers to the app
 const server = require('./config/server')(app)
 const database = require('./config/database')
@@ -24,8 +27,7 @@ app.use(express.urlencoded({ extended: false }));
 // app.use(cookieParser());
 
 
-// Serve static assets from ./dist .
-app.use(express.static('dist'));
+
 
 //connect up routes this must be last as it includes the catch all
 // for incoorect address

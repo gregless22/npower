@@ -15,11 +15,13 @@ module.exports = {
     home: "./vue/pages/home.js",
     products: "./vue/pages/products.js",
     contact: "./vue/pages/contact.js",
-    about: "./vue/pages/about.js"
+    about: "./vue/pages/about.js",
+    product: "./vue/pages/product.js"
   },
   output: {
     filename: '[name].[hash].bundle.js',
     path: path.resolve(__dirname, 'dist'),
+    publicPath: "/"
   },
   optimization: {
     splitChunks: {
@@ -127,6 +129,13 @@ module.exports = {
       chunks: ['contact', 'runtime', 'vendors'],
       filename: 'contact.html',//relative to root of the application
       favicon: 'vue/assets/images/favicon.ico'
+    }),
+    new HtmlWebpackPlugin({
+      title: 'NPower | Product',
+      template: 'vue/app.html',
+      chunks: ['product', 'runtime', 'vendors'],
+      filename: 'product.html',//relative to root of the application
+      favicon: 'vue/assets/images/favicon.ico',
     }),
     new MiniCssExtractPlugin({
       filename: 'style.css'
