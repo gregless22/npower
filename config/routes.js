@@ -45,6 +45,11 @@ router.get('/contact', (req, res, next) => {
 	res.sendFile(appRoot + '/dist/contact.html')
 })
 
+router.post('/contact', (req, res, next) => {
+	console.log("made it to contact")
+	res.send("Thank you question has been recieved")
+})
+
 router.get('/survey', (req, res, next) => {
 	res.sendFile(appRoot + '/dist/survey.html')
 })

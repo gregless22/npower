@@ -3,9 +3,9 @@
 <template>
   <div>
 	 <layout>
-	 	<b-container>
+	 	<b-container fluid>
 			<b-row class="h-100" align-h="center">
-				<b-col cols="7" class="text-justify">
+				<b-col cols="6" class="text-justify">
 					<h1>About</h1>
 					<p>
 						npower is one of Britain’s leading energy companies, and is part of the Innogy group, one of Europe’s leading electricity and gas companies. <br><br>
