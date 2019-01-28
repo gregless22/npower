@@ -1,6 +1,6 @@
 node_modules
 DS_Store
 Dockerfile
-docker_compose.yml
+docker-compose.yml
 dist
 data
