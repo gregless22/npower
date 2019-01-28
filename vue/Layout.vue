@@ -22,13 +22,13 @@
 				</b-row>
 			</b-col>	
   		</b-row>
-  		<b-row class="justify-content-md-center h-50"> 
-	  		<b-col align-self="center" class="text-center h-100">
+  		<b-row class="justify-content-md-center h-50 text-center"> 
+	  		<!-- <b-col align-self="center" class="text-center h-100"> -->
 	  			<slot></slot>
-	  		</b-col>
+	  		<!-- </b-col> -->
 		</b-row>
 		<b-row align-v="end" class="h-25">
-			<p>Footer</p>
+			<img src="./assets/images/footer.jpg" alt="Footer image" class="w-100">
 		</b-row>
 
   	</b-container>

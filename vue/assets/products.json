@@ -1,0 +1,29 @@
+[
+    {
+            "name": "Budget Option",
+            "description": "4.9 kW system",
+            "solarPanels": 18,
+            "powerwall": 0,
+            "inverter": 1,
+            "freeInstallation": true
+    },
+    {
+            "name": "Optimal Option",
+            "description": "6.5 kW system",
+            "solarPanels": 24,
+            "powerwall": 0,
+            "inverter": 1,
+            "freeInstallation": true
+    },
+    {
+            "name": "Investment Option",
+            "description": "8.7 kW system",
+            "solarPanels": 32,
+            "powerwall": 1,
+            "inverter": 1,
+            "freeInstallation": true
+    }
+
+
+
+]

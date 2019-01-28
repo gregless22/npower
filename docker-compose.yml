@@ -50,6 +50,9 @@ services:
       - front_end_build:/app/dist/  #this is probably needed once webpack has html copied over
     environment:
       NODE_ENV: development
+      VIRTUAL_HOST: npower.app
+    env_file:
+      - .env
     command: "npm run watch"
     networks:
       - frontend

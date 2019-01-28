@@ -1,6 +1,6 @@
 <template>
   <cardTemplate>
-    <b-form @submit="onSubmit" @reset="onReset" @next="onNext" :form="form">
+    <b-form :form="form">
 
       <!-- page 1 items -->
       <!-- name input -->
@@ -9,7 +9,8 @@
         id="nameGroup"
         label="Your Name:"
         label-for="nameInput">
-      <b-form-input 
+      <b-form-input
+        validated 
         id="nameInput"
         type="text"
         v-model="form.name"
@@ -74,8 +75,7 @@
       </b-form-group>
 
       <!-- buttons at the bottom of the form -->
-      <b-button type="reset" @click.prevent="onReset()" variant="danger">Reset</b-button>
-      <b-button type="back" @click.prevent="onBack()" variant="secondary">Back</b-button>
+      <b-button type="back" @click.prevent="onBack()" variant="secondary" v-if="show > 0">Back</b-button>
       <b-button type="next" @click.prevent="onNext()" variant="primary" v-if="show < 1">Next</b-button>
       <b-button type="finish" @click.prevent="onSubmit()" variant="primary" v-else>Finish</b-button>
       
@@ -84,6 +84,10 @@
 </template>
 
 <script>
+//import for validation
+import { validationMixin } from "vuelidate"
+import { required, minLength } from "vuelidate/lib/validators"
+
 import cardTemplate from './CardTemplate'
 export default {
   data () {
@@ -99,6 +103,14 @@ export default {
   props: {
     form: Object
   },
+  validations: {
+    form: {
+      name: {
+        required,
+        minLength: minLength(4)
+      }
+    }
+  },
   components: {
     cardTemplate
   },
@@ -107,25 +119,18 @@ export default {
       
       // emit to the parent with the data.
       this.$emit('input', this.form)
-      // this.$emit('accept', this.form)
-      
-    },
-    onReset (evt) {
-      // evt.preventDefault();
-      // /* Reset our form values */
-      // this.form.email = '';
-      // this.form.name = '';
-      // this.form.food = null;
-      // this.form.checked = [];
-      // /* Trick to reset/clear native browser form validation state */
-      // this.show = false;
-      // this.$nextTick(() => { this.show = true });
+       
     },
     onNext(evt) {
       //need to check the results are good.
-      // evt.preventDefault()
-      this.show++
-      // send the form back up to the parent to catch.
+      if (this.$v.$invalid){
+        alert("Please Fill out form Correctly")
+      }
+      else {
+        this.show++
+      }
+      
+
     },
     onBack(){
       // TODO if show < 0 then need to emit back to parent.
