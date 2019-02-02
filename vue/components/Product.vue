@@ -26,16 +26,7 @@
         <p slot="text">{{ product.powerwall }} x powerwall</p>
     </benefit>
 
-   
-    
-    
-
-
-
-
-
-    
-       
+     
     </a>
 
 
@@ -59,7 +50,7 @@ export default {
 </script>
 
 
-<style lang="scss" scoped>
+<style lang="css" scoped>
     #product {
         background-color: lightgray
         
@@ -68,7 +59,7 @@ export default {
         color: blue
     }
     h4 {
-
+        color: black
     }
   
 </style>

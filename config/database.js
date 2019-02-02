@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 const Sequelize = require('sequelize');
 
 //create the instance and connect

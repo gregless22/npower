@@ -43,7 +43,7 @@
 		}
 </script>
 
-<style>
+<style lang="css">
 	.container-fluid {
 		height: 100vh;
 	}
