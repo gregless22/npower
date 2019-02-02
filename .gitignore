@@ -3,3 +3,4 @@ DS_Store
 Dockerfile
 docker_compose.yml
 dist
+.env
