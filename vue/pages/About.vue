@@ -8,7 +8,7 @@
 				<b-col cols="6" class="text-justify">
 					<h1>About</h1>
 					<p>
-						npower is one of Britain’s leading energy companies, and is part of the Innogy group, one of Europe’s leading electricity and gas companies. <br><br>
+						NPower is one of Britain’s leading energy companies, and is part of the Innogy group, one of Europe’s leading electricity and gas companies. <br><br>
 						We serve around 4.84 million residential and business accounts with electricity and gas.
 					</p>
 				</b-col>
