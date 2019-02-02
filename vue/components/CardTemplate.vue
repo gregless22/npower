@@ -1,5 +1,5 @@
 <template>
-    <b-row class="h-100">
+    <b-row class="h-100 w-50">
         <b-col cols="1"></b-col>
         <b-col>
             <b-container class="h-100 p-5" id="question">
@@ -16,9 +16,8 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped>
+<style lang="css" scoped>
     #question {
         background-color: lightgray
-        
     }
 </style>

@@ -4,3 +4,4 @@ Dockerfile
 docker_compose.yml
 dist
 .env
+data

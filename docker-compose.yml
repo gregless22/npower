@@ -1,6 +1,6 @@
 # docker-compose.yml
 
-version: '3'
+version: '3.7'
 services: 
   app:
     container_name: app
@@ -11,16 +11,16 @@ services:
     volumes:
       # i may be holding two storages of the volume data in both containers for the vue data
       - .:/app/
-      - /app/node_modules/
       - front_end_build:/app/dist/
+      - node_modules:/app/node_modules/
     build: .
     env_file:
-      - .env
+      .env
     environment:
-      VIRTUAL_HOST: npower.app
+      VIRTUAL_HOST: ${VIRTUAL_HOST}
       VIRTUAL_PORT: ${PORT}
-      # NODE_ENV: development
-    command: "npm run dev"
+      NODE_ENV: ${NODE_ENV}
+    command: ${COMMAND}
     networks:
       - nginx-proxy
       - backend
@@ -30,12 +30,14 @@ services:
     container_name: db
     image: mysql:5.7
     ports:
-      - "4306:3306" #remove this for production
+      - ${MYSQL_PORT}
     restart: always
     volumes:
       - ./data:/var/lib/mysql
     env_file:
-      - .env
+      .env
+    environment:
+      PORT: ${MYSQL_PORT}
     networks:
       - backend
 
@@ -45,17 +47,19 @@ services:
     depends_on: 
       - app
     volumes:
-      - ./webpack.config.dev.js:/app/webpack.config.dev.js #need to copy in the webpack file 
+      # - ./${WEBPACK_FILE}:/app/${WEBPACK_FILE} #need to copy in the webpack file dev only
       - ./vue:/app/vue/   #this volume is to sync the cource files up so changes can be mirrored in the docker container
       - front_end_build:/app/dist/  #this is probably needed once webpack has html copied over
+      - node_modules:/app/node_modules
     environment:
-      NODE_ENV: development
-    command: "npm run watch"
+      NODE_ENV: ${NODE_ENV}
+    command: ${COMMAND_WEBPACK}
     networks:
       - frontend
 
 volumes:
   front_end_build:
+  node_modules:
 
 networks:
   backend:
