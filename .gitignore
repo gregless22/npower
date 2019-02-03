@@ -1,7 +1,5 @@
 node_modules
-DS_Store
-Dockerfile
-docker_compose.yml
+.DS_Store
 dist
 .env
 data
