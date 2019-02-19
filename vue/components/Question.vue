@@ -5,12 +5,11 @@
       <b-form-group v-if="show === 0" label="How many people currently live at the house">
         <b-form-radio-group
           stacked
-          :buttons="true"
           size="md"
-          v-model="form.homeResidents"
+          v-model="$v.homeResidents.$model"
           :options="homeResidents"
-          :required="true"
           name="homeResidents"
+          :state="$v.homeResidents.$dirty ? $v.homeResidents.$errors : null"
         />
       </b-form-group>
 
@@ -28,7 +27,6 @@
             size="md"
             v-model="form.appliances.kettle"
             :options="boolean"
-            required
           />
         </b-form-group>
 
@@ -38,7 +36,6 @@
             size="md"
             v-model="form.appliances.aircon.exists"
             :options="boolean"
-            required
           />
         </b-form-group>
         <b-form-group
@@ -157,7 +154,12 @@
 </template>
 
 <script>
+//import for validation
+import { validationMixin } from "vuelidate";
+import { required } from "vuelidate/lib/validators";
+
 import cardTemplate from "./CardTemplate";
+
 export default {
   components: {
     cardTemplate
@@ -180,6 +182,12 @@ export default {
       ],
       show: 0
     };
+  },
+  mixins: [validationMixin],
+  validations: {
+      homeResidents: {
+          required
+      }
   },
   methods: {
     onSubmit(evt) {
