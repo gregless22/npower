@@ -22,7 +22,7 @@
             horizontal
         >
         <b-form-radio-group 
-            buttons
+            stacked
             size="md"
             v-model="form.solar.exists"
             :options="boolean"
@@ -47,7 +47,7 @@
             label="Do you have Batteries"
             horizontal>
             <b-form-radio-group
-                buttons
+                stacked
                 size="md"
                 v-model="form.solar.battery.exists"
                 :options="boolean"
@@ -60,7 +60,7 @@
                 label="How many amps is the battery?"
                 horizontal>
                 <b-form-radio-group
-                    buttons
+                    stacked
                     size="md"
                     v-model="form.solar.battery.size"
                     :options="size"
@@ -122,7 +122,6 @@ export default {
       // send the form back up to the parent to catch.
     },
     onBack(){
-      // TODO if show < 0 then need to emit back to parent.
       this.show--
     }
   }

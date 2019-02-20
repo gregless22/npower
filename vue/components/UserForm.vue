@@ -53,6 +53,7 @@
           name="ownerInput"
           :state="$v.form.homeOwner.$dirty ? !$v.form.homeOwner.$error : null"
         />
+        {{ $v.form.homeOwner }}
       </b-form-group>
 
       <!-- postcode entre -->
@@ -155,6 +156,8 @@ export default {
       // check the first page
       if (this.$v.form.name.$invalid || this.$v.form.email.$invalid) {
         this.nextPageError = true;
+        this.$v.form.name.$touch();
+        this.$v.form.email.$touch();
       } else {
         this.form.name = this.$v.form.name.$model;
         this.form.email = this.$v.form.email.$model;
