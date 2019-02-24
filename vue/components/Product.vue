@@ -52,7 +52,7 @@ export default {
 
 <style lang="css" scoped>
     #product {
-        background-color: lightgray
+        background-color: rgb(255, 251, 251)
         
     }
     h3 {
