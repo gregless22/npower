@@ -2,13 +2,13 @@
 <template>
   <layout>
     <!-- question template is used -->
-    <question v-if="tracker.question.test === 1" :form="form" @input="onForm"></question>
+    <question v-if="tracker.question.test === 1" :form="form" @input="onForm" @exit="onExit"></question>
 
     <!-- question template is used -->
-    <question2 v-if="tracker.question.test === 2" :form="form" @input="onForm"></question2>
+    <question2 v-if="tracker.question.test === 2" :form="form" @input="onForm" @exit="onExit"></question2>
 
     <!-- user form template is used -->
-    <userForm v-if="tracker.form.test" :form="form" @input="onForm">
+    <userForm v-if="tracker.form.test" :form="form" @input="onForm" @exit="onExit">
       <!-- send the props in -->
     </userForm>
 
@@ -16,12 +16,14 @@
     <instruction v-if="tracker.instruction.test" @accept="onInstruction">
       <h5 slot="question">{{ instruction[iter].description }}</h5>
     </instruction>
-    <!-- {{ JSON.stringify(this.instruction) }} -->
-    <!-- <p> {{ JSON.stringify(form) }} </p> -->
   </layout>
 </template>
 
 <script>
+
+
+//get axios
+import axios from "axios"
 //get the data required.
 import index from "../assets/index.json";
 import questionsA from "../assets/questionsA.json";
@@ -142,11 +144,25 @@ export default {
 
       //if end of questions post
       if (this.iter == this.instruction.length) {
+        
         //set to 0 so it doesnt go out of range.
         this.iter = 0;
         //post here with axios to back end
-        alert("Survey has been submitted.  Thanks");
+        axios.post('/survey', this.form)
+        .then((res) => {
+          //redirect to products or whereever the res should be the pageID
+          window.location.href = '/products'
+          console.log(res)
+        })
+        .catch((err) => {
+          console.log(err)
+        })
+        
       }
+    },
+    onExit() {
+      //todo need to add module for alert.
+      window.location.href = '/'
     },
     onQuestion(evt) {
       this.tracker.instruction.test = true;

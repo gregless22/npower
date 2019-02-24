@@ -53,8 +53,7 @@
           name="ownerInput"
           :state="$v.form.homeOwner.$dirty ? !$v.form.homeOwner.$error : null"
         />
-        {{ $v.form.homeOwner }}
-      </b-form-group>
+       </b-form-group>
 
       <!-- postcode entre -->
       <b-form-group v-if="show === 1" label="Enter Postcode:" label-for="postcode">
@@ -147,9 +146,15 @@ export default {
         this.form.homeType = this.$v.form.homeType.$model;
         this.form.homeOwner = this.$v.form.homeOwner.$model;
         this.form.postcode = this.$v.form.postcode.$model;
-        // emit to the parent with the data.
-        this.nextPageError = true;
-        this.$emit("input", this.form);
+
+        if (this.$v.form.homeOwner.$model === "renting") {
+          this.$emit("exit")
+        } else {
+          // emit to the parent with the data.
+          this.nextPageError = true;
+          this.$emit("input", this.form);
+        }
+       
       }
     },
     onNext(evt) {

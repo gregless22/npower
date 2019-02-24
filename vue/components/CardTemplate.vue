@@ -18,6 +18,6 @@ export default {
 
 <style lang="css" scoped>
     #question {
-        background-color: lightgray
+        background-color:#e0e0e0
     }
 </style>

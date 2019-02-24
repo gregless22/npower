@@ -6,7 +6,7 @@ const express = require("express");
 const fallthrough = require("./fallthrough");
 
 const router = express.Router();
-const controller = null; //this instantiated by the constructor function
+const controllers = null; //this is assigned in the constructor
 
 //  deifne the routes for the home
 router.get("/", (req, res, next) => {
@@ -31,21 +31,11 @@ router.get("/products/:id(\\d+)/", (req, res, next) => {
   // res.sendFile(appRoot + '/dist/home.html')
 });
 
-// testing
-router.get("/product", (req, res, next) => {
-  // console.log(appRoot + `/dist/product.html ${req.params.id}`)
-  // res.sendFile(appRoot + `/dist/product.html`)
-  // res.end(`TODO special products page ${ JSON.stringify(req.params.id) }`)
-  // res.sendFile(appRoot + '/dist/product.html')
-  // res.send(req)
-});
-
 router.get("/contact", (req, res, next) => {
   res.sendFile(appRoot + "/dist/contact.html");
 });
 
 router.post("/contact", (req, res, next) => {
-  console.log("made it to contact");
   res.send("Thank you question has been recieved");
 });
 
@@ -53,13 +43,15 @@ router.get("/survey", (req, res, next) => {
   res.sendFile(appRoot + "/dist/survey.html");
 });
 
-router.post("survey", (req, res, next) => {
-  res.end("TODO parse the survey");
+router.post("/survey", (req, res, next) => {
+  controller.user.create(req, res, next)
+  // controller.property.create(req, res, next)
+  res.send("1");
 });
 
 fallthrough(router);
 
-module.exports = controller => {
+module.exports = (controller) => {
   this.controller = controller;
   return router;
 };

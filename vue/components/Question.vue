@@ -99,8 +99,7 @@
         label-class="font-weight-bold pt-0"
         class="mb-5"
       >
-        {{ form.appliances.hotWater }}
-        <b-form-group label="Hot Water System" horizontal>
+            <b-form-group label="Hot Water System" horizontal>
           <b-form-checkbox-group
             size="md"
             v-model="form.appliances.hotWater.exists"

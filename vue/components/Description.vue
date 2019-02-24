@@ -17,7 +17,7 @@ export default {
 
 <style lang="css" scoped>
     .description {
-        background-color: lightgray
+        background-color: rgb(251, 251, 251)
     }
    
   
