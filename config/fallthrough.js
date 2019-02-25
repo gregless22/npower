@@ -12,8 +12,7 @@ module.exports = router => {
 
   // Error Catching middleware.
   router.use((err, req, res, next) => {
-    console.log("Response With Error");
     console.log(err);
-    res.json(err);
+    res.send(err);
   });
 };

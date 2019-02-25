@@ -1,3 +1,4 @@
+/* eslint-disable arrow-body-style */
 // Model.js
 
 //this is the class to create the model.  Requires and instance of the sequalise ORM

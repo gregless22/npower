@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 // Controller.js
 
 const database = require(appRoot + '/config/database')

@@ -51,7 +51,7 @@ import question from "../components/Question";
 import question2 from "../components/Question2.vue";
 import instruction from "../components/Instruction.vue";
 import layout from "../Layout";
-import notification from "../components/Notification"
+import notification from "../components/Notification";
 
 export default {
   components: {
@@ -113,7 +113,7 @@ export default {
           }
         }
       },
-      notifications: [ ]
+      notifications: []
     };
   },
 
@@ -150,35 +150,49 @@ export default {
       this.iter++;
     },
     onForm(evt) {
-      // iterate to the next part
-      this.tracker.form.test = false;
-      this.tracker.instruction.test = true;
-      this.tracker.question.test = false;
-
       //if end of questions post
       if (this.iter == this.instruction.length) {
-        //todo call a loading notifcation
-
         //set to 0 so it doesnt go out of range.
-        this.iter = 0;
+        // this.iter = 0;
+
+        // post the notifications
+        this.notifications.push({
+          varient: "success",
+          message: "Thanks for your survey, results are being processed."
+        });
 
         //post here with axios to back end
         httpRequest
           .postSurvey(this.form)
           .then(res => {
-            //redirect to products or whereever the res should be the pageID
-            window.location.href = "/products";
-            console.log(res);
+            const page = res.data.find(element => {
+              return element.page;
+            });
+            //this is just a delay to read the message.  
+            setTimeout(() => {
+               if (page) {
+              window.location.href = "/products/" + page.page;
+            }
+            }, 3000)
           })
-          .catch(err => {
+           .catch(err => {
             console.log(err);
           });
+      } else {
+        // iterate to the next part
+        this.tracker.form.test = false;
+        this.tracker.instruction.test = true;
+        this.tracker.question.test = false;
       }
     },
     onExit() {
       // window.location.href = "/survey";
-      this.notifications.push( { variant: "warning", message: "As a renter you are unable to install Solar Panels. Thanks for your time" } )
-      this.iter = 0
+      this.notifications.push({
+        variant: "warning",
+        message:
+          "As a renter you are unable to install Solar Panels. Thanks for your time"
+      });
+      this.iter = 0;
       this.tracker.form.test = false;
       this.tracker.instruction.test = true;
       this.tracker.question.test = false;
@@ -195,9 +209,8 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-  .notification-wrapper {
-    position: fixed;
-    right: 20px;
-
-  }
+.notification-wrapper {
+  position: fixed;
+  right: 20px;
+}
 </style>

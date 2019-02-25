@@ -1,3 +1,4 @@
+/* eslint-disable arrow-body-style */
 /* eslint-disable no-undef */
 // routes.js
 
@@ -25,10 +26,7 @@ router.get("/products", (req, res, next) => {
 });
 
 router.get("/products/:id(\\d+)/", (req, res, next) => {
-  // console.log(appRoot + `/dist/product.html ${req.params.id}`)
   res.sendFile(appRoot + `/dist/product.html`);
-  // todo res.end(`TODO special products page ${ JSON.stringify(req.params.id) }`)
-  // res.sendFile(appRoot + '/dist/home.html')
 });
 
 router.get("/contact", (req, res, next) => {
@@ -44,13 +42,34 @@ router.get("/survey", (req, res, next) => {
 });
 
 router.post("/survey", (req, res, next) => {
-  // todo implement saving the data
-  controller.user.create(req, res, next)
-  // controller.property.create(req, res, next)
+  Promise.all([
+    controller.user.create(req, res, next),
+    controller.property.create(req, res, next),
+    { page: Math.floor((Math.random() * 3) + 1) }
+    
+  ])
+  .then((data) => {
+    res.json(data)
+  })
+  .catch((err) => {
+    next(err)
+  })
+  
 });
 
+//this is for testing purposes only to make sure the datbase is working correctly
 router.get("/index", (req, res, next) => {
-  controller.user.index(req, res, next)
+  Promise.all([
+    controller.user.index(req, res, next),
+    controller.property.index(req, res, next)
+  ])
+  .then((data) => {
+    res.json(data)
+  })
+  .catch((err) => {
+    next(err)
+  })
+  
 })
 
 fallthrough(router);
