@@ -9,7 +9,7 @@
 						<!-- this is a horizontal spacer -->
 					</b-col>
 					<b-col>
-						<b-navbar-brand href="#" class="pl-5 pt-2 pb-2 d-none d-sm-block">
+						<b-navbar-brand href="/" class="pl-5 pt-2 pb-2 d-none d-sm-block">
 							<img src="./assets/images/logo.png" alt="Logo of NPower">
 						</b-navbar-brand>
 					</b-col>

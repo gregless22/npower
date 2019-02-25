@@ -1,7 +1,7 @@
 <template>
   <layout>
     <b-container class="ml-5 mr-5">
-      <b-row>
+      <b-row class="h-100">
         <product :product="products[id]"></product>
         <description :product="products[id]"></description>
       </b-row>

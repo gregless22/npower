@@ -10,12 +10,12 @@ class UserController {
         this.model = model.user()
     }
 
-    create (req, res, next) {
+    create (req) {
         const { name, email, postcode: suburb } = req.body
         return this.model.create({ name, email, suburb })
     }
 
-    index (req, res, next) {
+    index () {
         return this.model.findAll()
     }
     
