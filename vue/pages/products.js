@@ -4,8 +4,8 @@ import Products from "./Products.vue";
 
 import BootstrapVue from "bootstrap-vue";
 
-import "bootstrap/dist/css/bootstrap.css";
-import "bootstrap-vue/dist/bootstrap-vue.css";
+
+import '../assets/styles/custom.scss'
 
 Vue.use(BootstrapVue);
 

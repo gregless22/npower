@@ -3,9 +3,20 @@
 <template>
   <div>
     <layout>
-      <b-container fluid>
+       
+      <b-container class="w-100">
+        
+          <b-col class="notification-wrapper" cols="2">
+            <notification
+              v-for="notification in notifications" 
+              :key="notification.index" 
+              :variant="notification.variant" 
+              :message="notification.message">
+            </notification>
+          </b-col>
+       
         <b-row class="h-100" align-h="center">
-          <b-col cols="12" md="7" lg="4" class="text-justify">
+          <b-col cols="12" md="10" lg="8" class="text-justify">
             <h1>Contact</h1>
             <b-row align-h="start" class="mt-5">
               <b-col cols="12" sm="10" md="8">
@@ -43,33 +54,25 @@
             </b-row>
           </b-col>
         </b-row>
+       
       </b-container>
-      {{form}}
     </layout>
   </div>
 </template>
-			 
-			 </b-col>
-			 </b-row>
-	 	</b-container>
-	 	
-	</layout>
-  </div>
-</template>
+		 
 
 <script>
 // import components
 import layout from "../Layout";
+import notification from "../components/Notification"
 
 // import dependancies
-import axios from "axios";
-
-//environmanet variable
-const serverURL = `http://npower.app/contact`;
+import httpRequest from "../services/Requests.js"
 
 export default {
   components: {
-    layout
+    layout,
+    notification
   },
   data() {
     return {
@@ -78,21 +81,30 @@ export default {
         email: "",
         topic: "",
         message: ""
-      }
+      },
+      notifications: []
     };
   },
   methods: {
     onSubmit() {
       //axios send to the server
-      axios
-        .post(serverURL)
+      httpRequest
+        .postContact(this.form)
         .then(res => {
-          alert(JSON.stringify(res));
+          this.notifications.push( { variant: "success", message: "Thankyou. Your request has been recieved"} )
         })
         .catch(res => {
-          alert("sorry there was an error with the server");
+          this.notifications.push( { variant: "danger", message: "There has been and error with the request, please try again"} )
         });
     }
   }
 };
 </script>
+
+<style lang="scss" scoped>
+  .notification-wrapper {
+    position: fixed;
+    right: 20px;
+
+  }
+</style>

@@ -1,5 +1,5 @@
 // get the model
-const model = require (appRoot + '/models/Model.js')
+// const model = require (appRoot + '/models/Model.js')
 
 
 module.export = {
@@ -7,4 +7,8 @@ module.export = {
         
     }
 
+}
+
+module.exports = (model) => {
+    this.model = model
 }

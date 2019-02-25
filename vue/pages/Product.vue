@@ -6,7 +6,6 @@
         <description :product="products[id]"></description>
       </b-row>
     </b-container>
-    <!-- {{ JSON.stringify(products) }} -->
   </layout>
 </template>
 

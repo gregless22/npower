@@ -6,7 +6,7 @@ const express = require("express");
 const fallthrough = require("./fallthrough");
 
 const router = express.Router();
-const controllers = null; //this is assigned in the constructor
+const controller = require("../controllers/Controller") //this is assigned in the constructor
 
 //  deifne the routes for the home
 router.get("/", (req, res, next) => {
@@ -44,14 +44,17 @@ router.get("/survey", (req, res, next) => {
 });
 
 router.post("/survey", (req, res, next) => {
+  // todo implement saving the data
   controller.user.create(req, res, next)
   // controller.property.create(req, res, next)
-  res.send("1");
 });
+
+router.get("/index", (req, res, next) => {
+  controller.user.index(req, res, next)
+})
 
 fallthrough(router);
 
-module.exports = (controller) => {
-  this.controller = controller;
+module.exports = () => {
   return router;
 };
