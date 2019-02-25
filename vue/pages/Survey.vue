@@ -1,6 +1,16 @@
 
 <template>
   <layout>
+
+    <b-col class="notification-wrapper" cols="2">
+      <notification
+        v-for="notification in notifications" 
+        :key="notification.index" 
+        :variant="notification.variant" 
+        :message="notification.message">
+      </notification>
+    </b-col>
+
     <!-- question template is used -->
     <question v-if="tracker.question.test === 1" :form="form" @input="onForm" @exit="onExit"></question>
 
@@ -15,15 +25,15 @@
     <!-- the instruction form is used -->
     <instruction v-if="tracker.instruction.test" @accept="onInstruction">
       <h5 slot="question">{{ instruction[iter].description }}</h5>
+      <span v-if="iter === 0" slot="button">Start Survey</span>
+      <span v-else slot="button">Continue</span>
     </instruction>
   </layout>
 </template>
 
 <script>
-
-
-//get axios
-import axios from "axios"
+//get services
+import httpRequest from "../services/Requests.js";
 //get the data required.
 import index from "../assets/index.json";
 import questionsA from "../assets/questionsA.json";
@@ -41,6 +51,7 @@ import question from "../components/Question";
 import question2 from "../components/Question2.vue";
 import instruction from "../components/Instruction.vue";
 import layout from "../Layout";
+import notification from "../components/Notification";
 
 export default {
   components: {
@@ -48,7 +59,8 @@ export default {
     question,
     userForm,
     instruction,
-    question2
+    question2,
+    notification
   },
   name: "myForm",
   data() {
@@ -100,7 +112,8 @@ export default {
             size: ""
           }
         }
-      }
+      },
+      notifications: []
     };
   },
 
@@ -137,32 +150,52 @@ export default {
       this.iter++;
     },
     onForm(evt) {
-      // iterate to the next part
-      this.tracker.form.test = false;
-      this.tracker.instruction.test = true;
-      this.tracker.question.test = false;
-
       //if end of questions post
       if (this.iter == this.instruction.length) {
-        
         //set to 0 so it doesnt go out of range.
-        this.iter = 0;
+        // this.iter = 0;
+
+        // post the notifications
+        this.notifications.push({
+          varient: "success",
+          message: "Thanks for your survey, results are being processed."
+        });
+
         //post here with axios to back end
-        axios.post('/survey', this.form)
-        .then((res) => {
-          //redirect to products or whereever the res should be the pageID
-          window.location.href = '/products'
-          console.log(res)
-        })
-        .catch((err) => {
-          console.log(err)
-        })
-        
+        httpRequest
+          .postSurvey(this.form)
+          .then(res => {
+            const page = res.data.find(element => {
+              return element.page;
+            });
+            //this is just a delay to read the message.  
+            setTimeout(() => {
+               if (page) {
+              window.location.href = "/products/" + page.page;
+            }
+            }, 3000)
+          })
+           .catch(err => {
+            console.log(err);
+          });
+      } else {
+        // iterate to the next part
+        this.tracker.form.test = false;
+        this.tracker.instruction.test = true;
+        this.tracker.question.test = false;
       }
     },
     onExit() {
-      //todo need to add module for alert.
-      window.location.href = '/'
+      // window.location.href = "/survey";
+      this.notifications.push({
+        variant: "warning",
+        message:
+          "As a renter you are unable to install Solar Panels. Thanks for your time"
+      });
+      this.iter = 0;
+      this.tracker.form.test = false;
+      this.tracker.instruction.test = true;
+      this.tracker.question.test = false;
     },
     onQuestion(evt) {
       this.tracker.instruction.test = true;
@@ -174,3 +207,10 @@ export default {
   }
 };
 </script>
+
+<style lang="scss" scoped>
+.notification-wrapper {
+  position: fixed;
+  right: 20px;
+}
+</style>

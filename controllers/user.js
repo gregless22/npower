@@ -1,11 +1,30 @@
+/* eslint-disable no-undef */
 //get the model
-const model = require(appRoot + '/models/Model.js')
+// const User = require('../models/user')
 
+class UserController {
 
+    // userModel;
 
-module.export = {
-    create: (req, res, next) => {
-        
+    constructor (model) {
+        this.model = model.user()
     }
 
+    create (req) {
+        const { name, email, postcode: suburb } = req.body
+        return this.model.create({ name, email, suburb })
+    }
+
+    index () {
+        return this.model.findAll()
+    }
+    
 }
+
+module.exports = (model) => new UserController(model)
+
+
+
+
+
+

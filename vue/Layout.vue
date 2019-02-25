@@ -9,7 +9,7 @@
 						<!-- this is a horizontal spacer -->
 					</b-col>
 					<b-col>
-						<b-navbar-brand href="#" class="pl-5 pt-2 pb-2 d-none d-sm-block">
+						<b-navbar-brand href="/" class="pl-5 pt-2 pb-2 d-none d-sm-block">
 							<img src="./assets/images/logo.png" alt="Logo of NPower">
 						</b-navbar-brand>
 					</b-col>
@@ -23,14 +23,11 @@
 			</b-col>	
   		</b-row>
   		<b-row class="justify-content-md-center h-50 text-center"> 
-	  		<!-- <b-col align-self="center" class="text-center h-100"> -->
-	  			<slot></slot>
-	  		<!-- </b-col> -->
+	  		<slot></slot>
 		</b-row>
 		<b-row align-v="end" class="h-25">
 			<img src="./assets/images/footer.jpg" alt="Footer image" class="w-100">
 		</b-row>
-
   	</b-container>
 </template>
 
@@ -43,8 +40,9 @@
 		}
 </script>
 
-<style lang="css">
-	.container-fluid {
+
+<style lang="scss">
+.container-fluid {
 		height: 100vh;
 	}
 </style>

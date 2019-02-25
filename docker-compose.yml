@@ -9,7 +9,6 @@ services:
     ports:
       - ${PORT}
     volumes:
-      # i may be holding two storages of the volume data in both containers for the vue data
       - .:/app/
       - front_end_build:/app/dist/
       - node_modules:/app/node_modules/

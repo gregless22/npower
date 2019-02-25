@@ -5,7 +5,7 @@
                 <slot name="question"></slot>
             </b-row>
             <b-row class="justify-content-center">
-                <b-button variant="primary" size="lg" @click.prevent="onClick()">Start Survey</b-button>
+                <b-button variant="primary" size="lg" @click.prevent="onClick()"><slot name="button"></slot></b-button>
             </b-row>
         </b-container>
     </card-template>

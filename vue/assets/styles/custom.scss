@@ -1,0 +1,19 @@
+//== Colors
+
+$primary:         #115fa6;
+$success:         #5cb85c;
+$info:            #5bc0de;
+$warning:         #f0ad4e;
+$danger:          #d9534f;
+$light:           #f2f2f2;
+
+// buttons
+$btn-border-radius-all: 1.3em;
+
+$btn-border-radius: $btn-border-radius-all;
+$btn-border-radius-lg: $btn-border-radius-all;
+
+
+@import '../../../node_modules/bootstrap/scss/bootstrap.scss';
+//says to add this but there isnt anything there.
+// @import '../../../node_modules/bootstrap-vue/src/index.scss';

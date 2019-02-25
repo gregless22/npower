@@ -6,17 +6,23 @@ const app = express()
 // const cookieParser = require('cookie-parser');
 const cors = require('cors')
 const path = require('path');
+const cookieParser = require('cookie-parser');
 global.appRoot = path.resolve(__dirname);
 
 // Serve static assets from ./dist .
 app.use(express.static('dist'));
 
+// make req able to have the body parsed
+app.use(express.json());
+app.use(express.urlencoded({ extended: false }));
+app.use(cookieParser());
+
 //add the database, routes, controllers to the app
 const server = require('./config/server')(app)
 const database = require('./config/database')
 const model = require('./models/Model')(database)
-const controllers = require(appRoot + '/controllers/Controller') //this will require a copy of the model
-const routes = require('./config/routes')(controllers)
+// const controller = require(appRoot + '/controllers/Controller')(model) //this will require a copy of the model
+const routes = require('./config/routes')()
 
 
 

@@ -4,7 +4,7 @@
 <template>
   <layout>
     <b-container class="ml-5 mr-5">
-      <b-row>
+      <b-row class="h-100">
         <product v-for="(product, index) in products" :key="index" :product="product"></product>
       </b-row>
     </b-container>
